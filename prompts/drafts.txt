@@ -8,11 +8,11 @@ Subject: Application for <Role> at <Company>
 
 Hi [Recruiter's Name],
 
-I hope this message finds you well. I came across the <Role> opening at <Company> and wanted to reach out directly — the role aligns closely with my background and I'm genuinely excited about the opportunity.
+I hope this message finds you well. I came across the <Role> opening at <Company> and wanted to reach out directly — the role aligns closely with my background, and I'm genuinely excited about the opportunity.
 
 I have [X years] of experience in [relevant domain], with a strong track record in [key skill 1], [key skill 2], and [key skill 3]. In my most recent role at [Current/Last Company], I [brief impact statement — quantify where possible].
 
-I have attached my tailored resume and would love the chance to connect for a quick conversation. Please let me know if you'd like any additional information.
+I have attached my tailored resume and would love the chance to connect for a quick conversation. I'm available to join immediately. Please let me know if you'd like any additional information.
 
 Thank you for your time.
 
@@ -32,9 +32,9 @@ I noticed you work at <Company> and wanted to reach out. I'm currently exploring
 
 Would you be open to a quick chat or perhaps referring me internally? I'd really appreciate any insights you could share about the team or the role.
 
-I've attached my resume for your reference. Happy to connect at a time that works for you.
+I've attached my resume for your reference. I'm available to join immediately. Happy to connect at a time that works for you.
 
-Thanks so much,
+Thank you!
 <User name>
 
 ---
