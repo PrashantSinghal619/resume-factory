@@ -1,0 +1,55 @@
+Generate two outreach drafts for a job application. Return both drafts in plain text, clearly labelled.
+
+---
+
+DRAFT 1 — RECRUITER EMAIL
+
+Subject: Application for <Role> at <Company>
+
+Hi [Recruiter's Name],
+
+I hope this message finds you well. I came across the <Role> opening at <Company> and wanted to reach out directly — the role aligns closely with my background, and I'm genuinely excited about the opportunity.
+
+I have [X years] of experience in [relevant domain], with a strong track record in [key skill 1], [key skill 2], and [key skill 3]. In my most recent role at [Current/Last Company], I [brief impact statement — quantify where possible].
+
+I have attached my tailored resume and would love the chance to connect for a quick conversation. I'm available to join immediately. Please let me know if you'd like any additional information.
+
+Thank you for your time.
+
+Best regards,
+<User name>
+[Phone number]
+[LinkedIn URL]
+[Email address]
+
+---
+
+DRAFT 2 — LINKEDIN REFERRAL MESSAGE
+
+Hi [Connection's Name],
+
+I noticed you work at <Company> and wanted to reach out. I'm currently exploring new opportunities and came across the <Role> position — it looks like a great fit for my background in [relevant domain].
+
+Would you be open to a quick chat or perhaps referring me internally? I'd really appreciate any insights you could share about the team or the role.
+
+I've attached my resume for your reference. I'm available to join immediately. Happy to connect at a time that works for you.
+
+Thank you!
+<User name>
+
+---
+
+INSTRUCTIONS FOR THE LLM:
+- Replace all placeholders: <Company>, <Role>, <User name>
+- Fill in [X years], [relevant domain], [key skill 1/2/3], [Current/Last Company], and [brief impact statement] using the resume data provided.
+- Do NOT change the tone, greeting style, or overall structure of either template.
+- Keep both messages concise and professional.
+- Do not add any extra sections or sign-offs beyond what is shown.
+
+---
+RESUME SUMMARY / KEY FACTS:
+[Paste a brief summary of the candidate's background, skills, and most recent role here]
+
+ROLE: [Job title]
+COMPANY: [Company name]
+USER NAME: [Full name]
