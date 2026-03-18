@@ -1,0 +1,31 @@
+Extract structured information from the job description below and return it as JSON.
+
+Return ONLY valid JSON — no markdown, no explanation, no extra text.
+
+Output format:
+{
+  "company": "",
+  "role": "",
+  "portal": "",
+  "keywords": [],
+  "priority_keywords": [],
+  "domain": ""
+}
+
+Field definitions:
+- company: Name of the hiring company. Infer from context if not explicitly stated.
+- role: Exact job title as written in the job description.
+- portal: Job board or platform where this listing was found (e.g. LinkedIn, Naukri, AngelList). Leave blank if unknown.
+- keywords: All technically relevant keywords, tools, frameworks, methodologies, and skills mentioned in the JD that are important for ATS matching. Keep them concise (1-3 words each). Do not include soft skills or generic phrases.
+- priority_keywords: The top 5 most critical ATS keywords from the keywords list — choose the ones most likely to be used in automated screening filters for this specific role.
+- domain: The broad industry or technical domain (e.g. "Backend Engineering", "Data Engineering", "Product Management", "DevOps", "Frontend Development", "Machine Learning").
+
+Rules:
+- priority_keywords must be a subset of keywords.
+- Keywords must be technical and role-relevant only.
+- Do not include duplicates.
+- If the company name cannot be inferred, use an empty string.
+
+---
+JOB DESCRIPTION:
+[Paste the full job description here]
