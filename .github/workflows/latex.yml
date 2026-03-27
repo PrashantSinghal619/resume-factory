@@ -14,18 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Find triggered TEX file
+      - name: Find most recently modified TEX file
         id: find_tex
         run: |
-          TEX=$(python3 -c "
-          import json, sys
-          event = json.load(open('$GITHUB_EVENT_PATH'))
-          files = []
-          for commit in event.get('commits', []):
-              files += commit.get('added', []) + commit.get('modified', [])
-          tex = [f for f in files if f.startswith('output/tex/') and f.endswith('.tex')]
-          print(tex[0] if tex else '')
-          ")
+          TEX=$(find output/tex -name "*.tex" -printf '%T@ %p\n' \
+            | sort -rn \
+            | head -1 \
+            | cut -d' ' -f2-)
           echo "tex_file=$TEX" >> $GITHUB_OUTPUT
           echo "Found: $TEX"
 
