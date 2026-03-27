@@ -17,9 +17,15 @@ jobs:
       - name: Find triggered TEX file
         id: find_tex
         run: |
-          TEX=$(git diff-tree --no-commit-id -r --name-only ${{ github.sha }} \
-            | grep '^output/tex/.*\.tex$' \
-            | head -1)
+          TEX=$(python3 -c "
+          import json, sys
+          event = json.load(open('$GITHUB_EVENT_PATH'))
+          files = []
+          for commit in event.get('commits', []):
+              files += commit.get('added', []) + commit.get('modified', [])
+          tex = [f for f in files if f.startswith('output/tex/') and f.endswith('.tex')]
+          print(tex[0] if tex else '')
+          ")
           echo "tex_file=$TEX" >> $GITHUB_OUTPUT
           echo "Found: $TEX"
 
