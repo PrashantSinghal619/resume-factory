@@ -1,0 +1,24 @@
+name: Compile Resume
+
+on:
+  push:
+    paths:
+      - 'output/tex/*.tex'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: output/tex/*.tex
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdf
+          path: output/tex/*.pdf
