@@ -21,8 +21,12 @@ jobs:
             | sort -rn \
             | head -1 \
             | cut -d' ' -f2-)
+          # Derive expected PDF name from TEX name
+          BASENAME=$(basename "$TEX" .tex)
           echo "tex_file=$TEX" >> $GITHUB_OUTPUT
-          echo "Found: $TEX"
+          echo "pdf_name=${BASENAME}.pdf" >> $GITHUB_OUTPUT
+          echo "TEX: $TEX"
+          echo "Expected PDF: ${BASENAME}.pdf"
 
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v2
@@ -32,12 +36,25 @@ jobs:
       - name: Move PDF to output/pdf
         run: |
           mkdir -p output/pdf
-          find output/tex -name "*.pdf" -exec mv {} output/pdf/ \;
+          PDF_NAME="${{ steps.find_tex.outputs.pdf_name }}"
+          # Find the compiled PDF by exact name, wherever latexmk dropped it
+          find . -name "$PDF_NAME" ! -path "./output/pdf/*" -exec mv {} output/pdf/ \;
+          echo "=== output/pdf ==="
+          ls -la output/pdf/
 
       - name: Commit PDF back to repo
         run: |
+          PDF_PATH="output/pdf/${{ steps.find_tex.outputs.pdf_name }}"
+          if [ ! -f "$PDF_PATH" ]; then
+            echo "Error: Expected PDF not found at $PDF_PATH"
+            exit 1
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/pdf/*.pdf
-          git commit -m "Compile PDF: $(ls output/pdf/*.pdf | xargs -n1 basename)" || echo "No changes"
-          git push
+          git add "$PDF_PATH"
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Compile PDF: ${{ steps.find_tex.outputs.pdf_name }}"
+            git push
+          fi
