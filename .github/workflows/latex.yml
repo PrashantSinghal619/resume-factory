@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -16,9 +18,17 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: output/tex/*.tex
+          work_in_root_file_dir: true
 
-      - name: Upload PDF
-        uses: actions/upload-artifact@v4
-        with:
-          name: resume-pdf
-          path: output/tex/*.pdf
+      - name: Move PDF to output/pdf
+        run: |
+          mkdir -p output/pdf
+          find output/tex -name "*.pdf" -exec mv {} output/pdf/ \;
+
+      - name: Commit PDF back to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/pdf/*.pdf
+          git commit -m "Compile PDF: $(ls output/pdf/*.pdf | xargs -n1 basename)" || echo "No changes"
+          git push
