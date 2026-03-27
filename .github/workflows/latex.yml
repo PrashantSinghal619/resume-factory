@@ -14,11 +14,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Find triggered TEX file
+        id: find_tex
+        run: |
+          TEX=$(git diff-tree --no-commit-id -r --name-only ${{ github.sha }} \
+            | grep '^output/tex/.*\.tex$' \
+            | head -1)
+          echo "tex_file=$TEX" >> $GITHUB_OUTPUT
+          echo "Found: $TEX"
+
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: output/tex/*.tex
-          work_in_root_file_dir: true
+          root_file: ${{ steps.find_tex.outputs.tex_file }}
 
       - name: Move PDF to output/pdf
         run: |
