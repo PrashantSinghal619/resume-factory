@@ -2,14 +2,14 @@ Extract structured information from the job description below and return it as J
 
 Return ONLY valid JSON — no markdown, no explanation, no extra text.
 
-Output format:
+JSON Output model:
 {
-  "company": "",
-  "role": "",
-  "portal": "",
-  "keywords": [],
-  "priority_keywords": [],
-  "domain": ""
+  "company": String,
+  "role": String,
+  "portal": String,
+  "keywords": String[],
+  "priority_keywords": String[],
+  "domain": String
 }
 
 Field definitions:
